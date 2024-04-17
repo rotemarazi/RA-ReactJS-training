@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Session 1 - Assignment</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/javascript">
+      //====================== Comment / Uncomment =====================
+      //Using JS to manipulate the DOM
+      /*       const root = document.getElementById("root");
+      const title = document.createElement("h1");
+      title.textContent = "Hello World!";
+      console.log(title);
+      root.appendChild(title); */
+      //====================== END =====================
+
+      //====================== Comment / Uncomment =====================
+      //Using React
+      /*const root = ReactDOM.createRoot(document.getElementById("root"));
+      const subTitle = React.createElement(
+        "h2",
+        { style: { color: "blue" } },
+        "I like React!"
+      );
+      root.render(subTitle);*/
+      //====================== END =====================
+
+      //====================== Comment / Uncomment =====================
+      //Nested components  #1
+      /*const root = ReactDOM.createRoot(document.getElementById("root"));
+      const element = React.createElement(
+        "div",
+        {
+          style: {
+            backgroundColor: "gray",
+            height: "100px",
+            width: "100px",
+          },
+        },
+        React.createElement(
+          "button",
+          {
+            style: {
+              backgroundColor: "white",
+              margin: "10px",
+              height: "fit",
+              width: "fit",
+            },
+            onClick: () => alert("Im a child!"),
+          },
+          "Nested in DIV"
+        )
+      );
+      root.render(element);*/
+      //====================== END =====================
+
+      //====================== Comment / Uncomment =====================
+      //Nested components  #2
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      const label = React.createElement(
+        "label",
+        { style: { backgroundColor: "white", margin: "30px" } },
+        "First child!"
+      );
+      const text = React.createElement("input", {
+        type: "text",
+        defaultValue: "Second child!",
+        style: { margin: "20px", backgroundColor: "purple" },
+      });
+
+      const parentEl = React.createElement(
+        "p",
+        {
+          style: {
+            backgroundColor: "green",
+            height: "200px",
+            width: "400px",
+          },
+        },
+        label,
+        text
+      );
+      root.render(parentEl);
+      //====================== END =====================
+    </script>
+  </body>
+</html>
