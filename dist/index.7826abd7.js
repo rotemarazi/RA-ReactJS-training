@@ -37562,14 +37562,8 @@ function ProductList() {
     const handleFilter = ()=>{
         console.log(filterValue);
         let filteredProducts = [];
-        if (resultedProducts.length > 0 && searchClick) filteredProducts = resultedProducts.filter((product)=>product.category.toLowerCase().includes({
-                filterValue
-            }));
-        else {
-            console.log(products);
-            filteredProducts = products.filter((product)=>product.category.includes(filterValue));
-        }
-        console.log(filteredProducts);
+        if (resultedProducts.length > 0 && searchClick) filteredProducts = resultedProducts.filter((product)=>product.category.includes(filterValue));
+        else filteredProducts = products.filter((product)=>product.category.includes(filterValue));
         setProducts(filteredProducts);
     /* const filteredProducts = products.filter((product) => product.rating > 3);
     setProducts(filteredProducts); */ };
@@ -37603,12 +37597,12 @@ function ProductList() {
                             }
                         }, void 0, false, {
                             fileName: "components/ProductList.js",
-                            lineNumber: 79,
+                            lineNumber: 77,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "components/ProductList.js",
-                        lineNumber: 78,
+                        lineNumber: 76,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37620,7 +37614,7 @@ function ProductList() {
                                 children: "Search"
                             }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 96,
+                                lineNumber: 94,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -37631,19 +37625,19 @@ function ProductList() {
                                 children: searchClick ? resultedProducts.length + " products found" : products.length + " products available!"
                             }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 99,
+                                lineNumber: 97,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "components/ProductList.js",
-                        lineNumber: 95,
+                        lineNumber: 93,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "components/ProductList.js",
-                lineNumber: 77,
+                lineNumber: 75,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37662,7 +37656,7 @@ function ProductList() {
                                 children: "--Filter By--"
                             }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 112,
+                                lineNumber: 110,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -37670,7 +37664,7 @@ function ProductList() {
                                 children: "Category"
                             }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 113,
+                                lineNumber: 111,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -37678,7 +37672,7 @@ function ProductList() {
                                 children: "Max Price"
                             }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 114,
+                                lineNumber: 112,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -37686,13 +37680,13 @@ function ProductList() {
                                 children: "Min Rate"
                             }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 115,
+                                lineNumber: 113,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "components/ProductList.js",
-                        lineNumber: 107,
+                        lineNumber: 105,
                         columnNumber: 9
                     }, this),
                     categoryFilter && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
@@ -37711,7 +37705,7 @@ function ProductList() {
                                 children: "--Choose Category--"
                             }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 127,
+                                lineNumber: 125,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -37719,7 +37713,7 @@ function ProductList() {
                                 children: "smartphones"
                             }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 128,
+                                lineNumber: 126,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -37727,7 +37721,7 @@ function ProductList() {
                                 children: "laptops"
                             }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 129,
+                                lineNumber: 127,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -37735,7 +37729,7 @@ function ProductList() {
                                 children: "fragrances"
                             }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 130,
+                                lineNumber: 128,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -37743,7 +37737,7 @@ function ProductList() {
                                 children: "skincare"
                             }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 131,
+                                lineNumber: 129,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -37751,7 +37745,7 @@ function ProductList() {
                                 children: "groceries"
                             }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 132,
+                                lineNumber: 130,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -37759,13 +37753,13 @@ function ProductList() {
                                 children: "home-decoration"
                             }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 133,
+                                lineNumber: 131,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "components/ProductList.js",
-                        lineNumber: 118,
+                        lineNumber: 116,
                         columnNumber: 11
                     }, this),
                     priceFilter && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -37781,7 +37775,7 @@ function ProductList() {
                         }
                     }, void 0, false, {
                         fileName: "components/ProductList.js",
-                        lineNumber: 137,
+                        lineNumber: 135,
                         columnNumber: 11
                     }, this),
                     rateFilter && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -37797,7 +37791,7 @@ function ProductList() {
                         }
                     }, void 0, false, {
                         fileName: "components/ProductList.js",
-                        lineNumber: 149,
+                        lineNumber: 147,
                         columnNumber: 11
                     }, this),
                     (rateFilter || priceFilter || categoryFilter) && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -37811,7 +37805,7 @@ function ProductList() {
                                 children: "Apply Filters"
                             }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 162,
+                                lineNumber: 160,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -37823,19 +37817,19 @@ function ProductList() {
                                 children: "Reset Filters"
                             }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 165,
+                                lineNumber: 163,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "components/ProductList.js",
-                        lineNumber: 161,
+                        lineNumber: 159,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "components/ProductList.js",
-                lineNumber: 106,
+                lineNumber: 104,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37844,24 +37838,24 @@ function ProductList() {
                         product: product
                     }, index, false, {
                         fileName: "components/ProductList.js",
-                        lineNumber: 188,
+                        lineNumber: 186,
                         columnNumber: 15
                     }, this)) : products.map((product, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _productDefault.default), {
                         product: product
                     }, index, false, {
                         fileName: "components/ProductList.js",
-                        lineNumber: 191,
+                        lineNumber: 189,
                         columnNumber: 15
                     }, this))
             }, void 0, false, {
                 fileName: "components/ProductList.js",
-                lineNumber: 185,
+                lineNumber: 183,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "components/ProductList.js",
-        lineNumber: 76,
+        lineNumber: 74,
         columnNumber: 5
     }, this);
 }

@@ -48,15 +48,13 @@ export default function ProductList() {
     let filteredProducts = [];
     if (resultedProducts.length > 0 && searchClick) {
       filteredProducts = resultedProducts.filter((product) =>
-        product.category.toLowerCase().includes({ filterValue })
+        product.category.includes(filterValue)
       );
     } else {
-      console.log(products);
       filteredProducts = products.filter((product) =>
         product.category.includes(filterValue)
       );
     }
-    console.log(filteredProducts);
     setProducts(filteredProducts);
     /* const filteredProducts = products.filter((product) => product.rating > 3);
     setProducts(filteredProducts); */
