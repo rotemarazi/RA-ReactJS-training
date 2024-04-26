@@ -20,6 +20,9 @@ export default function ProductList() {
     setPriceFilter(false);
     setRateFilter(false);
     document.getElementById("filterselectcion").value = "";
+    if (!searchText) {
+      fetchProducts();
+    } else handleSearch();
   };
   useEffect(() => {
     fetchProducts();
@@ -42,17 +45,19 @@ export default function ProductList() {
   };
   const handleFilter = () => {
     console.log(filterValue);
+    let filteredProducts = [];
     if (resultedProducts.length > 0 && searchClick) {
-      const filteredProducts = resultedProducts.filter(
-        (product) => product.category.toLowerCase().includes({ filterValue })
-        //   (priceFilter === "" || product.price <= parseFloat(priceFilter))
+      filteredProducts = resultedProducts.filter((product) =>
+        product.category.toLowerCase().includes({ filterValue })
       );
     } else {
-      const filteredProducts = products.filter(
-        (product) => product.category.toLowerCase().includes({ filterValue })
-        //   (priceFilter === "" || product.price <= parseFloat(priceFilter))
+      console.log(products);
+      filteredProducts = products.filter((product) =>
+        product.category.includes(filterValue)
       );
     }
+    console.log(filteredProducts);
+    setProducts(filteredProducts);
     /* const filteredProducts = products.filter((product) => product.rating > 3);
     setProducts(filteredProducts); */
   };
@@ -66,6 +71,7 @@ export default function ProductList() {
       setResultedProducts(matchedProducts);
     }
   };
+
   return (
     <Container>
       <Form className="d-flex">
