@@ -37531,7 +37531,9 @@ var _s = $RefreshSig$();
 function ProductList() {
     _s();
     const [products, setProducts] = (0, _react.useState)([]);
+    const [resultedProducts, setResultedProducts] = (0, _react.useState)([]);
     const [searchText, setSearchText] = (0, _react.useState)("");
+    const [searchClick, setSearchClick] = (0, _react.useState)(false);
     (0, _react.useEffect)(()=>{
         fetchProducts();
     }, []);
@@ -37544,15 +37546,11 @@ function ProductList() {
         const filteredProducts = products.filter((product)=>product.rating > 3);
         setProducts(filteredProducts);
     };
-    const handleChangeSearch = (e)=>{
-        setSearchText(e.target.value);
-    };
     const handleSearch = ()=>{
         if (searchText !== "") {
+            setSearchClick(true);
             const matchedProducts = products.filter((product)=>product.title.toLowerCase().includes(searchText.toLowerCase()));
-            console.log("Searchhh", searchText);
-            console.log("matchedProducts", matchedProducts);
-            setProducts(matchedProducts);
+            setResultedProducts(matchedProducts);
         }
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _containerDefault.default), {
@@ -37566,20 +37564,24 @@ function ProductList() {
                             type: "search",
                             placeholder: "Search",
                             className: "me-2",
+                            onKeyPress: (e)=>{
+                                e.key === "Enter" && e.preventDefault();
+                            },
                             "aria-label": "Search",
                             value: searchText,
-                            onKeyDown: handleSearch,
                             onChange: (e)=>{
-                                handleChangeSearch(e);
+                                setSearchText(e.target.value);
+                                setSearchClick(false);
+                                console.log("searchText", searchText);
                             }
                         }, void 0, false, {
                             fileName: "components/ProductList.js",
-                            lineNumber: 44,
+                            lineNumber: 41,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "components/ProductList.js",
-                        lineNumber: 43,
+                        lineNumber: 40,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37591,20 +37593,18 @@ function ProductList() {
                                 children: "Search"
                             }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 57,
+                                lineNumber: 58,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                                 style: {
+                                    fontSize: "20px",
                                     marginLeft: "20px"
                                 },
-                                children: [
-                                    `${products.length} `,
-                                    "products found"
-                                ]
-                            }, void 0, true, {
+                                children: searchClick ? resultedProducts.length + " products found" : products.length + " products available!"
+                            }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 60,
+                                lineNumber: 61,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -37616,43 +37616,49 @@ function ProductList() {
                                 children: "Filter"
                             }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 64,
+                                lineNumber: 66,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "components/ProductList.js",
-                        lineNumber: 56,
+                        lineNumber: 57,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "components/ProductList.js",
-                lineNumber: 42,
+                lineNumber: 39,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "d-flex flex-wrap gap-3",
-                children: products.map((product, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _productDefault.default), {
+                children: searchClick ? resultedProducts.map((product, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _productDefault.default), {
                         product: product
                     }, index, false, {
                         fileName: "components/ProductList.js",
-                        lineNumber: 77,
-                        columnNumber: 11
+                        lineNumber: 80,
+                        columnNumber: 15
+                    }, this)) : products.map((product, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _productDefault.default), {
+                        product: product
+                    }, index, false, {
+                        fileName: "components/ProductList.js",
+                        lineNumber: 83,
+                        columnNumber: 15
                     }, this))
             }, void 0, false, {
                 fileName: "components/ProductList.js",
-                lineNumber: 75,
+                lineNumber: 77,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "components/ProductList.js",
-        lineNumber: 41,
+        lineNumber: 38,
         columnNumber: 5
     }, this);
 }
-_s(ProductList, "zOt+GYnAfQwzrshmow9cLZlw+cY=");
+_s(ProductList, "f94VNCXdIeGg9+Xr9jh3gdEu9HI=");
 _c = ProductList;
 var _c;
 $RefreshReg$(_c, "ProductList");
