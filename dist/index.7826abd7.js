@@ -37534,6 +37534,16 @@ function ProductList() {
     const [resultedProducts, setResultedProducts] = (0, _react.useState)([]);
     const [searchText, setSearchText] = (0, _react.useState)("");
     const [searchClick, setSearchClick] = (0, _react.useState)(false);
+    const [categoryFilter, setCategoryFilter] = (0, _react.useState)(false);
+    const [priceFilter, setPriceFilter] = (0, _react.useState)(false);
+    const [rateFilter, setRateFilter] = (0, _react.useState)(false);
+    const [filterValue, setFilterValue] = (0, _react.useState)("");
+    const resetFilters = ()=>{
+        setCategoryFilter(false);
+        setPriceFilter(false);
+        setRateFilter(false);
+        document.getElementById("filterselectcion").value = "";
+    };
     (0, _react.useEffect)(()=>{
         fetchProducts();
     }, []);
@@ -37542,10 +37552,24 @@ function ProductList() {
         const jsonProducts = await products.json();
         setProducts(jsonProducts.products);
     };
-    const handleFilter = ()=>{
-        const filteredProducts = products.filter((product)=>product.rating > 3);
-        setProducts(filteredProducts);
+    const handleSetFilter = (filter)=>{
+        if (filter === "category") setCategoryFilter(true);
+        else if (filter === "maxprice") setPriceFilter(true);
+        else if (filter === "minrate") setRateFilter(true);
     };
+    const handleFilter = ()=>{
+        console.log(filterValue);
+        if (resultedProducts.length > 0 && searchClick) {
+            const filteredProducts = resultedProducts.filter((product)=>product.category.toLowerCase().includes({
+                    filterValue
+                }));
+        } else {
+            const filteredProducts = products.filter((product)=>product.category.toLowerCase().includes({
+                    filterValue
+                }));
+        }
+    /* const filteredProducts = products.filter((product) => product.rating > 3);
+    setProducts(filteredProducts); */ };
     const handleSearch = ()=>{
         if (searchText !== "") {
             setSearchClick(true);
@@ -37564,7 +37588,7 @@ function ProductList() {
                             type: "search",
                             placeholder: "Search",
                             className: "me-2",
-                            onKeyPress: (e)=>{
+                            onKeyUp: (e)=>{
                                 e.key === "Enter" && e.preventDefault();
                             },
                             "aria-label": "Search",
@@ -37576,12 +37600,12 @@ function ProductList() {
                             }
                         }, void 0, false, {
                             fileName: "components/ProductList.js",
-                            lineNumber: 41,
+                            lineNumber: 73,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "components/ProductList.js",
-                        lineNumber: 40,
+                        lineNumber: 72,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37593,7 +37617,7 @@ function ProductList() {
                                 children: "Search"
                             }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 58,
+                                lineNumber: 90,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -37604,31 +37628,211 @@ function ProductList() {
                                 children: searchClick ? resultedProducts.length + " products found" : products.length + " products available!"
                             }, void 0, false, {
                                 fileName: "components/ProductList.js",
-                                lineNumber: 61,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
-                                onClick: ()=>{
-                                    handleFilter();
-                                },
-                                className: "m-3",
-                                variant: "primary",
-                                children: "Filter"
-                            }, void 0, false, {
-                                fileName: "components/ProductList.js",
-                                lineNumber: 66,
+                                lineNumber: 93,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "components/ProductList.js",
-                        lineNumber: 57,
+                        lineNumber: 89,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "components/ProductList.js",
-                lineNumber: 39,
+                lineNumber: 71,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "filters",
+                style: {
+                    margin: "20px"
+                },
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
+                        name: "filterselectcion",
+                        id: "filterselectcion",
+                        onChange: (e)=>handleSetFilter(e.target.value),
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                value: "",
+                                children: "--Filter By--"
+                            }, void 0, false, {
+                                fileName: "components/ProductList.js",
+                                lineNumber: 106,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                value: "category",
+                                children: "Category"
+                            }, void 0, false, {
+                                fileName: "components/ProductList.js",
+                                lineNumber: 107,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                value: "maxprice",
+                                children: "Max Price"
+                            }, void 0, false, {
+                                fileName: "components/ProductList.js",
+                                lineNumber: 108,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                value: "minrate",
+                                children: "Min Rate"
+                            }, void 0, false, {
+                                fileName: "components/ProductList.js",
+                                lineNumber: 109,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "components/ProductList.js",
+                        lineNumber: 101,
+                        columnNumber: 9
+                    }, this),
+                    categoryFilter && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
+                        style: {
+                            margin: "20px"
+                        },
+                        name: "categoryfilter",
+                        id: "categoryfilter",
+                        onChange: (e)=>{
+                            setFilterValue(e.target.value);
+                            setCategoryFilter(true);
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                value: "",
+                                children: "--Choose Category--"
+                            }, void 0, false, {
+                                fileName: "components/ProductList.js",
+                                lineNumber: 121,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                value: "smartphones",
+                                children: "smartphones"
+                            }, void 0, false, {
+                                fileName: "components/ProductList.js",
+                                lineNumber: 122,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                value: "laptops",
+                                children: "laptops"
+                            }, void 0, false, {
+                                fileName: "components/ProductList.js",
+                                lineNumber: 123,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                value: "fragrances",
+                                children: "fragrances"
+                            }, void 0, false, {
+                                fileName: "components/ProductList.js",
+                                lineNumber: 124,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                value: "skincare",
+                                children: "skincare"
+                            }, void 0, false, {
+                                fileName: "components/ProductList.js",
+                                lineNumber: 125,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                value: "groceries",
+                                children: "groceries"
+                            }, void 0, false, {
+                                fileName: "components/ProductList.js",
+                                lineNumber: 126,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                value: "home",
+                                children: "home-decoration"
+                            }, void 0, false, {
+                                fileName: "components/ProductList.js",
+                                lineNumber: 127,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "components/ProductList.js",
+                        lineNumber: 112,
+                        columnNumber: 11
+                    }, this),
+                    priceFilter && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                        style: {
+                            margin: "20px"
+                        },
+                        type: "number",
+                        placeholder: "Filter by max price",
+                        value: filterValue,
+                        onChange: (e)=>{
+                            setFilterValue(e.target.value);
+                            setPriceFilter(true);
+                        }
+                    }, void 0, false, {
+                        fileName: "components/ProductList.js",
+                        lineNumber: 131,
+                        columnNumber: 11
+                    }, this),
+                    rateFilter && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                        style: {
+                            margin: "20px"
+                        },
+                        type: "number",
+                        placeholder: "Filter by max rate",
+                        value: filterValue,
+                        onChange: (e)=>{
+                            setFilterValue(e.target.value);
+                            setRateFilter(true);
+                        }
+                    }, void 0, false, {
+                        fileName: "components/ProductList.js",
+                        lineNumber: 143,
+                        columnNumber: 11
+                    }, this),
+                    (rateFilter || priceFilter || categoryFilter) && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                        style: {
+                            margin: "20px"
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
+                                onClick: handleFilter,
+                                variant: "primary",
+                                children: "Apply Filters"
+                            }, void 0, false, {
+                                fileName: "components/ProductList.js",
+                                lineNumber: 156,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
+                                style: {
+                                    marginLeft: "20px"
+                                },
+                                onClick: resetFilters,
+                                variant: "primary",
+                                children: "Reset Filters"
+                            }, void 0, false, {
+                                fileName: "components/ProductList.js",
+                                lineNumber: 159,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "components/ProductList.js",
+                        lineNumber: 155,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "components/ProductList.js",
+                lineNumber: 100,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37637,28 +37841,28 @@ function ProductList() {
                         product: product
                     }, index, false, {
                         fileName: "components/ProductList.js",
-                        lineNumber: 80,
+                        lineNumber: 182,
                         columnNumber: 15
                     }, this)) : products.map((product, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _productDefault.default), {
                         product: product
                     }, index, false, {
                         fileName: "components/ProductList.js",
-                        lineNumber: 83,
+                        lineNumber: 185,
                         columnNumber: 15
                     }, this))
             }, void 0, false, {
                 fileName: "components/ProductList.js",
-                lineNumber: 77,
+                lineNumber: 179,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "components/ProductList.js",
-        lineNumber: 38,
+        lineNumber: 70,
         columnNumber: 5
     }, this);
 }
-_s(ProductList, "f94VNCXdIeGg9+Xr9jh3gdEu9HI=");
+_s(ProductList, "kCSbZq4A5UoMSYyHTvhRZN0IIc8=");
 _c = ProductList;
 var _c;
 $RefreshReg$(_c, "ProductList");

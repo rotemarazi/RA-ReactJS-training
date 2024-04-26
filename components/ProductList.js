@@ -10,6 +10,17 @@ export default function ProductList() {
   const [resultedProducts, setResultedProducts] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [searchClick, setSearchClick] = useState(false);
+  const [categoryFilter, setCategoryFilter] = useState(false);
+  const [priceFilter, setPriceFilter] = useState(false);
+  const [rateFilter, setRateFilter] = useState(false);
+  const [filterValue, setFilterValue] = useState("");
+
+  const resetFilters = () => {
+    setCategoryFilter(false);
+    setPriceFilter(false);
+    setRateFilter(false);
+    document.getElementById("filterselectcion").value = "";
+  };
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -20,9 +31,30 @@ export default function ProductList() {
     setProducts(jsonProducts.products);
   };
 
+  const handleSetFilter = (filter) => {
+    if (filter === "category") {
+      setCategoryFilter(true);
+    } else if (filter === "maxprice") {
+      setPriceFilter(true);
+    } else if (filter === "minrate") {
+      setRateFilter(true);
+    }
+  };
   const handleFilter = () => {
-    const filteredProducts = products.filter((product) => product.rating > 3);
-    setProducts(filteredProducts);
+    console.log(filterValue);
+    if (resultedProducts.length > 0 && searchClick) {
+      const filteredProducts = resultedProducts.filter(
+        (product) => product.category.toLowerCase().includes({ filterValue })
+        //   (priceFilter === "" || product.price <= parseFloat(priceFilter))
+      );
+    } else {
+      const filteredProducts = products.filter(
+        (product) => product.category.toLowerCase().includes({ filterValue })
+        //   (priceFilter === "" || product.price <= parseFloat(priceFilter))
+      );
+    }
+    /* const filteredProducts = products.filter((product) => product.rating > 3);
+    setProducts(filteredProducts); */
   };
 
   const handleSearch = () => {
@@ -42,7 +74,7 @@ export default function ProductList() {
             type="search"
             placeholder="Search"
             className="me-2"
-            onKeyPress={(e) => {
+            onKeyUp={(e) => {
               e.key === "Enter" && e.preventDefault();
             }}
             aria-label="Search"
@@ -63,7 +95,79 @@ export default function ProductList() {
               ? resultedProducts.length + " products found"
               : products.length + " products available!"}
           </span>
-          <Button
+        </div>
+      </Form>
+      <div className="filters" style={{ margin: "20px" }}>
+        <select
+          name="filterselectcion"
+          id="filterselectcion"
+          onChange={(e) => handleSetFilter(e.target.value)}
+        >
+          <option value="">--Filter By--</option>
+          <option value="category">Category</option>
+          <option value="maxprice">Max Price</option>
+          <option value="minrate">Min Rate</option>
+        </select>
+        {categoryFilter && (
+          <select
+            style={{ margin: "20px" }}
+            name="categoryfilter"
+            id="categoryfilter"
+            onChange={(e) => {
+              setFilterValue(e.target.value);
+              setCategoryFilter(true);
+            }}
+          >
+            <option value="">--Choose Category--</option>
+            <option value="smartphones">smartphones</option>
+            <option value="laptops">laptops</option>
+            <option value="fragrances">fragrances</option>
+            <option value="skincare">skincare</option>
+            <option value="groceries">groceries</option>
+            <option value="home">home-decoration</option>
+          </select>
+        )}
+        {priceFilter && (
+          <input
+            style={{ margin: "20px" }}
+            type="number"
+            placeholder="Filter by max price"
+            value={filterValue}
+            onChange={(e) => {
+              setFilterValue(e.target.value);
+              setPriceFilter(true);
+            }}
+          />
+        )}
+        {rateFilter && (
+          <input
+            style={{ margin: "20px" }}
+            type="number"
+            placeholder="Filter by max rate"
+            value={filterValue}
+            onChange={(e) => {
+              setFilterValue(e.target.value);
+              setRateFilter(true);
+            }}
+          />
+        )}
+        {(rateFilter || priceFilter || categoryFilter) && (
+          <span style={{ margin: "20px" }}>
+            <Button onClick={handleFilter} variant="primary">
+              Apply Filters
+            </Button>
+            <Button
+              style={{ marginLeft: "20px" }}
+              onClick={resetFilters}
+              variant="primary"
+            >
+              Reset Filters
+            </Button>
+          </span>
+        )}
+      </div>
+
+      {/* <Button
             onClick={() => {
               handleFilter();
             }}
@@ -71,9 +175,7 @@ export default function ProductList() {
             variant="primary"
           >
             Filter
-          </Button>
-        </div>
-      </Form>
+          </Button> */}
       <div className="d-flex flex-wrap gap-3">
         {searchClick
           ? resultedProducts.map((product, index) => (
