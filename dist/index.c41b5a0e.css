@@ -13331,4 +13331,20 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+.NVbToq_container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.NVbToq_codey {
+  width: 23.75rem;
+}
+
+@media only screen and (width <= 48rem) {
+  .NVbToq_container {
+    flex-direction: column;
+  }
+}
 /*# sourceMappingURL=index.c41b5a0e.css.map */
