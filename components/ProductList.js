@@ -14,16 +14,19 @@ export default function ProductList() {
   const [priceFilter, setPriceFilter] = useState(false);
   const [rateFilter, setRateFilter] = useState(false);
   const [filterValue, setFilterValue] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   const resetFilters = () => {
     setCategoryFilter(false);
     setPriceFilter(false);
     setRateFilter(false);
-    document.getElementById("filterselectcion").value = "";
+    setFilterValue("");
+    setFilteredProducts([]);
     if (!searchText) {
       fetchProducts();
     } else handleSearch();
   };
+
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -37,25 +40,57 @@ export default function ProductList() {
   const handleSetFilter = (filter) => {
     if (filter === "category") {
       setCategoryFilter(true);
+      setPriceFilter(false);
+      setRateFilter(false);
     } else if (filter === "maxprice") {
       setPriceFilter(true);
+      setCategoryFilter(false);
+      setRateFilter(false);
     } else if (filter === "minrate") {
       setRateFilter(true);
+      setCategoryFilter(false);
+      setPriceFilter(false);
     }
   };
   const handleFilter = () => {
     console.log(filterValue);
-    let filteredProducts = [];
-    if (resultedProducts.length > 0 && searchClick) {
-      filteredProducts = resultedProducts.filter((product) =>
-        product.category.includes(filterValue)
-      );
+    if (filteredProducts === undefined) {
+      filteredProducts = [];
     } else {
-      filteredProducts = products.filter((product) =>
-        product.category.includes(filterValue)
-      );
+      fetchProducts();
     }
-    setProducts(filteredProducts);
+    if (resultedProducts.length > 0 && searchClick) {
+      if (categoryFilter) {
+        setFilteredProducts(
+          resultedProducts.filter((product) =>
+            product.category.includes(filterValue)
+          )
+        );
+      } else if (priceFilter) {
+        setFilteredProducts(
+          resultedProducts.filter((product) => product.price < filterValue)
+        );
+      } else if (rateFilter) {
+        setFilteredProducts(
+          resultedProducts.filter((product) => product.rating > filterValue)
+        );
+      }
+    } else {
+      if (categoryFilter) {
+        setFilteredProducts(
+          products.filter((product) => product.category.includes(filterValue))
+        );
+      } else if (priceFilter) {
+        setFilteredProducts(
+          products.filter((product) => product.price < filterValue)
+        );
+      } else if (rateFilter) {
+        setFilteredProducts(
+          products.filter((product) => product.rating > filterValue)
+        );
+      }
+    }
+    //setProducts(filteredProducts);
     /* const filteredProducts = products.filter((product) => product.rating > 3);
     setProducts(filteredProducts); */
   };
@@ -133,9 +168,11 @@ export default function ProductList() {
         )}
         {priceFilter && (
           <input
-            style={{ margin: "20px" }}
+            style={{ margin: "20px", width: "100px" }}
             type="number"
-            placeholder="Filter by max price"
+            name="pricefilter"
+            id="pricefilter"
+            placeholder="Max price"
             value={filterValue}
             onChange={(e) => {
               setFilterValue(e.target.value);
@@ -145,9 +182,11 @@ export default function ProductList() {
         )}
         {rateFilter && (
           <input
-            style={{ margin: "20px" }}
+            name="ratefilter"
+            id="ratefilter"
+            style={{ margin: "20px", width: "100px" }}
             type="number"
-            placeholder="Filter by max rate"
+            placeholder="Min rate"
             value={filterValue}
             onChange={(e) => {
               setFilterValue(e.target.value);
@@ -183,6 +222,10 @@ export default function ProductList() {
       <div className="d-flex flex-wrap gap-3">
         {searchClick
           ? resultedProducts.map((product, index) => (
+              <Product key={index} product={product} />
+            ))
+          : filterValue && filteredProducts.length > 0
+          ? filteredProducts.map((product, index) => (
               <Product key={index} product={product} />
             ))
           : products.map((product, index) => (
