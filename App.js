@@ -3,24 +3,49 @@ import ReactDOM from "react-dom/client";
 import NavBar from "./components/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProductList from "./components/ProductList";
+import AboutUs from "./components/AboutUs";
+import Page404 from "./components/Page404";
+import ContactUs from "./components/ContactUs";
 import Banner from "./components/Banner";
+import { Outlet, createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
-const products = fetch("https://dummyjson.com/products")
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data);
-  });
 
 function App() {
   return (
     <div>
       <NavBar />
-      <Banner />
-      <ProductList />
+      <Outlet />
     </div>
   );
 }
+const appRouter = createBrowserRouter([
+  {
+    // parent route component
+    element: <App />,
+    errorElement: <Page404 />,
+    // child route components
+    children: [
+      {
+        path: "/",
+        element: (
+          <>
+            <Banner />,
+            <ProductList />,
+          </>
+        ),
+      },
+      // other pages....
+      {
+        path: "/aboutus",
+        element: <AboutUs />,
+      },
+      {
+        path: "/contactus",
+        element: <ContactUs />,
+      },
+    ],
+  },
+]);
 
-root.render(<App />);
+root.render(<RouterProvider router={appRouter} />);

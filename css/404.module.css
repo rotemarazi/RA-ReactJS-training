@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.codey {
+  width: calc(380rem / 16);
+}
+
+@media only screen and (max-width: calc(768rem / 16)) {
+  .container {
+    flex-direction: column;
+  }
+}
