@@ -5,8 +5,14 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { useState } from "react";
 
 export default function NavBar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleClick = () => {
+    setIsLoggedIn(!isLoggedIn);
+  };
   return (
     <>
       <Navbar expand="lg" className="bg-body-tertiary">
@@ -40,7 +46,14 @@ export default function NavBar() {
                 Link
               </Nav.Link>
             </Nav>
-            <Form className="d-flex">
+            <Nav className="ms-auto">
+              <Nav.Link href="#link" onClick={handleClick}>
+                <Button variant="primary">
+                  {isLoggedIn ? "Logout" : "Login"}{" "}
+                </Button>
+              </Nav.Link>
+            </Nav>
+            {/* <Form className="d-flex">
               <Form.Control
                 type="search"
                 placeholder="Search"
@@ -48,7 +61,7 @@ export default function NavBar() {
                 aria-label="Search"
               />
               <Button variant="outline-success">Search</Button>
-            </Form>
+            </Form> */}
           </Navbar.Collapse>
         </Container>
       </Navbar>
