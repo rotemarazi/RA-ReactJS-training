@@ -2,7 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import NavBar from "./components/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./css/index.css";
+import "bootstrap/dist/css/bootstrap.css";
 import ProductList from "./components/ProductList";
+import ProductDetails from "./components/ProductDetails";
 import AboutUs from "./components/AboutUs";
 import Page404 from "./components/Page404";
 import ContactUs from "./components/ContactUs";
@@ -19,6 +22,7 @@ function App() {
     </div>
   );
 }
+
 const appRouter = createBrowserRouter([
   {
     // parent route component
@@ -36,6 +40,10 @@ const appRouter = createBrowserRouter([
         ),
       },
       // other pages....
+      {
+        path: "/products/:productId",
+        element: <ProductDetails />,
+      },
       {
         path: "/aboutus",
         element: <AboutUs />,
