@@ -2,15 +2,19 @@ import React from "react";
 import { Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 
 export default function Product(props) {
-  const { category, title, rating, thumbnail, brand, price } = props.product;
+  const { category, title, rating, thumbnail, brand, price, id } =
+    props.product;
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Img variant="top" src={thumbnail} />
       <Card.Body>
         <Card.Title>
-          {title} by {brand}
+          <Link to={`/products/${id}`}>
+            {title} by {brand}
+          </Link>
           <br />
           <span className="badge bg-secondary">$ {price} only</span>
         </Card.Title>
