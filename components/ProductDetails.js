@@ -2,21 +2,12 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
 import "../css/index.css";
+import useProductDetails from "../utils/useProductDetails";
 
 export default function ProductDetails() {
-  const [product, setProduct] = useState({});
   const { productId } = useParams();
-  useEffect(() => {
-    fetchProduct();
-  }, []);
 
-  const fetchProduct = async () => {
-    const product = await fetch("https://dummyjson.com/products/" + productId);
-    const jsonProduct = await product.json();
-    setProduct(jsonProduct);
-    console.log(jsonProduct);
-  };
-
+  const product = useProductDetails(productId);
   return (
     <div className="container">
       <div className="card-left">

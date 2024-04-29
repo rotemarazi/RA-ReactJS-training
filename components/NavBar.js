@@ -39,6 +39,9 @@ export default function NavBar() {
               <Link className="nav-link" to="/contactus">
                 Contact Us
               </Link>
+              <Link className="nav-link" to="/ProductCategory">
+                Categories
+              </Link>
               <NavDropdown title="Link" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action4">
