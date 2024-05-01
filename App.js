@@ -11,16 +11,31 @@ import AboutUs from "./components/AboutUs";
 import Page404 from "./components/Page404";
 import ContactUs from "./components/ContactUs";
 import Banner from "./components/Banner";
-
+import UserContext from "./utils/UserContext";
 import { Outlet, createBrowserRouter, RouterProvider } from "react-router-dom";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const ProductCategory = lazy(() => import("./components/ProductCategory"));
 
 function App() {
+  // Authentication code
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // API to fetch user
+    const data = {
+      user: "Rosie",
+    };
+    setUser(data.user);
+  }, []);
+
   return (
     <div>
-      <NavBar />
-      <Outlet />
+      <UserContext.Provider value={{ loggedInUser: user }}>
+        <NavBar />
+        <Outlet />
+      </UserContext.Provider>
     </div>
   );
 }

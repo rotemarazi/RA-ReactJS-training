@@ -5,10 +5,12 @@ import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { useState } from "react";
+import UserContext from "../utils/UserContext";
+import { useState, useContext } from "react";
 
 export default function NavBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const user = useContext(UserContext);
 
   const handleClick = () => {
     setIsLoggedIn(!isLoggedIn);
@@ -59,7 +61,7 @@ export default function NavBar() {
             <Nav className="ms-auto">
               <Nav.Link href="#link" onClick={handleClick}>
                 <Button variant="primary">
-                  {isLoggedIn ? "Logout" : "Login"}{" "}
+                  Hi {user.loggedInUser}, {isLoggedIn ? "Logout" : "Login"}{" "}
                 </Button>
               </Nav.Link>
             </Nav>
